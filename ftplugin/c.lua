@@ -1,0 +1,4 @@
+-- local sopt = {noremap = true, silent = true}
+-- local map = vim.api.nvim_set_keymap
+-- map('n', '<S-A-f>', ':py3f /home/sirius/clang-format.py<CR>', sopt)
+-- map('i', '<S-A-f>', '<Esc><cmd>py3f /home/sirius/clang-format.py<CR>', sopt)
