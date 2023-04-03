@@ -1,24 +1,27 @@
 -- complment
-require('lsp')
+-- require('lsp')
 
 -- coding
-require('coding-settings')
+-- require('coding-settings')
 
 -- keybings
 require('keybindings')
 
 -- utils
-require('utils')
+-- require('utils')
 
 -- basic settings
 require('basic')
 
 -- packer plugins
+
 require('plugins')
 
 -- plugin-config
 require('plugin-config')
+if vim.g.vscode then
 
--- theme
-require('theme.gruvbox')
-
+else
+    -- theme
+    require('theme.gruvbox')
+end

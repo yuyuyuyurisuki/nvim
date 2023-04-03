@@ -9,8 +9,12 @@ vim.opt.termguicolors = true
 vim.g.encoding = "UTF-8"
 vim.o.fileencoding = 'utf-8'
 -- 使用相对行号
-vim.wo.number = true
-vim.wo.relativenumber = true
+
+if vim.g.vscode then
+else
+    vim.wo.number = true
+    vim.wo.relativenumber = true
+end
 -- 高亮所在行
 vim.wo.cursorline = true
 -- 显示左侧图标指示列
@@ -21,7 +25,8 @@ vim.wo.signcolumn = "yes"
 vim.o.tabstop = 4
 vim.bo.tabstop = 4
 vim.o.softtabstop = 4
-vim.o.expandtab = true
+vim.bo.softtabstop = 4
+-- vim.o.expandtab = true
 vim.o.shiftround = true
 -- >> << 时移动长度
 vim.o.shiftwidth = 4
@@ -53,13 +58,14 @@ vim.o.mouse = "a"
 vim.o.backup = false
 vim.o.writebackup = false
 vim.o.swapfile = false
--- smaller updatetime 
+-- smaller updatetime
 vim.o.updatetime = 300
 -- 等待mappings
 vim.o.timeoutlen = 100
 -- split window 从下边和右边出现
 vim.o.splitbelow = true
 vim.o.splitright = true
+
 -- 自动补全不自动选中
 vim.g.completeopt = "menu,menuone,noselect,noinsert"
 -- 不可见字符的显示，这里只把空格显示为一个点
@@ -78,6 +84,7 @@ vim.opt.shell = "/bin/fish"
 -- vim.g.maplocalleader = ';'
 -- let neovim use system clipboard
 vim.opt.clipboard = "unnamedplus"
+
 -- change background
 
 
@@ -87,3 +94,10 @@ vim.opt.clipboard = "unnamedplus"
 
 -- clipborad_sync_system
 
+vim.cmd([[
+    augroup highlight_yank
+    autocmd!
+    au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=300}
+augroup END
+
+]])
