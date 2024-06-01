@@ -1,7 +1,7 @@
 local saga = require 'lspsaga'
 
 -- use custom config
-saga.init_lsp_saga({
+saga.setup({
   -- put modified options in there
 
   -- Options with default value

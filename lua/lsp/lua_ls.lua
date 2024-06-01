@@ -1,5 +1,5 @@
 local utils = require('utils')
-require 'lspconfig'.sumneko_lua.setup {
+require 'lspconfig'.lua_ls.setup {
 
   -- on_attach = my_custom_on_attach,
   on_attach = utils.on_attach,

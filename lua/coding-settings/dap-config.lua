@@ -27,7 +27,7 @@ local function config_dapi_and_sign()
 end
 
 local function config_dapui()
-  local dap, dapui = require "dap", require "dapui"
+  local dap, dapui = require "dap", require "plugins-config.dapui"
 
   local debug_open = function()
     dapui.open()

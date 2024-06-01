@@ -1,27 +1,34 @@
--- complment
--- require('lsp')
-
--- coding
--- require('coding-settings')
+-- basic settings
+require('basic')
 
 -- keybings
 require('keybindings')
 
--- utils
--- require('utils')
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+require("lazy").setup("plugins")
 
--- basic settings
-require('basic')
+-- lazynvim plugins
+require('plugins-config')
 
--- packer plugins
+if not vim.g.vscode then
+  -- utils
+  require('utils')
+  -- complment
+  require('lsp')
 
-require('plugins')
-
--- plugin-config
-require('plugin-config')
-if vim.g.vscode then
-
-else
-    -- theme
-    require('theme.gruvbox')
+  -- coding
+  require('coding-settings')
+  -- theme
+  require('theme.gruvbox')
 end

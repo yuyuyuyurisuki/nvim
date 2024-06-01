@@ -1,155 +1,296 @@
--- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
-
-
-return require('packer').startup(function()
-  use {
-    'phaazon/hop.nvim',
-    branch = 'v2',   -- optional but strongly recommended
-  }
-  if vim.g.vscode then
-  else
-    -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
+local not_vscode = not vim.g.vscode
+return {
+    -- {"folke/lazy.nvim"},
+    {
+        'phaazon/hop.nvim',
+        branch = 'v2'
+    },
 
     -- Configurations for Nvim LSP
-    use 'neovim/nvim-lspconfig'
-    use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
-    use { "glepnir/lspsaga.nvim", branch = "main" }
-
-
+    {
+        'neovim/nvim-lspconfig',
+        cond = not_vscode
+    },
+    {
+        'jose-elias-alvarez/null-ls.nvim', -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
+        cond = not_vscode
+    },
+    {
+        "glepnir/lspsaga.nvim",
+        branch = "main",
+        cond = not_vscode
+    },
     -- Autocompletion plugin
-    use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
-    use 'hrsh7th/nvim-cmp'
-    use 'hrsh7th/cmp-nvim-lua'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-cmdline'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-emoji'
-    use 'hrsh7th/cmp-calc'
-    use 'rcarriga/cmp-dap'
-    use 'hrsh7th/cmp-nvim-lsp-signature-help'
-    use 'hrsh7th/cmp-nvim-lsp-document-symbol'
-    -- use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
-    use { 'jalvesaq/Nvim-R', branch = 'stable' }
+    {
+        'hrsh7th/cmp-nvim-lsp', -- LSP source for nvim-cmp
+        cond = not_vscode
+    },
+    {
+        'hrsh7th/nvim-cmp',
+        cond = not_vscode
+    },
+    {
+        'hrsh7th/cmp-nvim-lua',
+        cond = not_vscode
+    },
+    {
+        'hrsh7th/cmp-buffer',
+        cond = not_vscode
+    },
+    {
+        'hrsh7th/cmp-cmdline',
+        cond = not_vscode
+    },
+    {
+        'hrsh7th/cmp-path',
+        cond = not_vscode
+    },
+    {
+        'hrsh7th/cmp-emoji',
+        cond = not_vscode
+    },
+    {
+        'hrsh7th/cmp-calc',
+        cond = not_vscode
+    },
+    {
+        'rcarriga/cmp-dap',
+        cond = not_vscode
+    },
+    {
+        'hrsh7th/cmp-nvim-lsp-signature-help',
+        cond = not_vscode
+    },
+    {
+        'hrsh7th/cmp-nvim-lsp-document-symbol',
+        cond = not_vscode
+    },
+    --  { 'tzachar/cmp-tabnine', run = './install.sh', dependeces = 'hrsh7th/nvim-cmp' },
+    --  { 'jalvesaq/Nvim-R', branch = 'stable' },
 
     -- build and run
-    use {
-      'Arjun31415/BuildTask.nvim',
-      requires = "rcarriga/nvim-notify"
-    }
-    use { 'CRAG666/code_runner.nvim', requires = 'nvim-lua/plenary.nvim' }
+    {
+        'Arjun31415/BuildTask.nvim',
+        dependencies = "rcarriga/nvim-notify",
+        cond = not_vscode
+    },
+    {
+        'CRAG666/code_runner.nvim',
+        dependeces = 'nvim-lua/plenary.nvim',
+        cond = not_vscode
+    },
 
 
     -- basic
-    use 'nvim-lua/popup.nvim'
+    {
+        'nvim-lua/popup.nvim',
+        cond = not_vscode
+    },
 
 
     -- Snippets source for nvim-cmp
-    use 'saadparwaiz1/cmp_luasnip'
-    use 'L3MON4D3/LuaSnip'
+    {
+        'saadparwaiz1/cmp_luasnip',
+        cond = not_vscode
+    },
+    {
+        'L3MON4D3/LuaSnip',
+        version = "v2.*",
+        cond = not_vscode
+    },
 
     --To enable more of the features of lsp
-    use 'simrat39/rust-tools.nvim'
-    use 'p00f/clangd_extensions.nvim'
-    use {
-      event = { "BufRead Cargo.toml" },
-      'saecki/crates.nvim',
-      requires = { 'nvim-lua/plenary.nvim' },
-    }
-    use 'onsails/lspkind.nvim'
+    {
+        'simrat39/rust-tools.nvim',
+        cond = not_vscode
+    },
+    {
+        'p00f/clangd_extensions.nvim',
+        cond = not_vscode
+    },
+    {
+        event = "BufRead Cargo.toml",
+        'saecki/crates.nvim',
+        tag = 'stable',
+        dependeces = 'nvim-lua/plenary.nvim',
+        cond = not_vscode
+    },
+    {
+        'onsails/lspkind.nvim',
+        cond = not_vscode
+    },
 
     -- file-explorer
-    use {
-      'kyazdani42/nvim-tree.lua',
-      requires = 'kyazdani42/nvim-web-devicons', -- optional, for file icons
+    {
+        'kyazdani42/nvim-tree.lua',
+        dependeces = 'kyazdani42/nvim-web-devicons', -- optional, for file icons
+        cond = not_vscode
 
-    }
+    },
 
     -- highlight and treesitter
-    use {
-      'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate'
-    }
-    use 'nvim-treesitter/nvim-treesitter-context'
-    use 'p00f/nvim-ts-rainbow'
-    use {
-      'm-demare/hlargs.nvim',
-      requires = 'nvim-treesitter/nvim-treesitter'
-    }
-    use 'nvim-treesitter/nvim-treesitter-textobjects'
+
+
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = function()
+            require("nvim-treesitter.install").update({ with_sync = true })()
+        end,
+        cond = not_vscode
+    },
+    {
+        'nvim-treesitter/nvim-treesitter-context',
+        cond = not_vscode
+    },
+    {
+        'p00f/nvim-ts-rainbow',
+        cond = not_vscode
+    },
+    {
+        'm-demare/hlargs.nvim',
+        dependeces = 'nvim-treesitter/nvim-treesitter',
+        cond = not_vscode
+    },
+    {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        cond = not_vscode
+    },
 
 
     -- tools
-    use 'lukas-reineke/indent-blankline.nvim'
-    use {
-      "jiaoshijie/undotree",
-      requires = "nvim-lua/plenary.nvim",
-    }
-    use {
-      "folke/todo-comments.nvim",
-      requires = "nvim-lua/plenary.nvim",
-    }
-    use 'folke/trouble.nvim'
-    use 'RRethy/vim-illuminate'
-    use 'norcalli/nvim-colorizer.lua'
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        main = "ibl",
+        cond = not_vscode
+    },
+    {
+        "jiaoshijie/undotree",
+        dependeces = "nvim-lua/plenary.nvim",
+        cond = not_vscode
+    },
+    {
+        "folke/todo-comments.nvim",
+        dependeces = "nvim-lua/plenary.nvim",
+        cond = not_vscode
+    },
+    {
+        'folke/trouble.nvim',
+        cond = not_vscode
+    },
+    {
+        'RRethy/vim-illuminate',
+        cond = not_vscode
+    },
+    {
+        'norcalli/nvim-colorizer.lua',
+        cond = not_vscode
+    },
 
 
 
 
     -- function zone
-    use {
-      'nvim-lualine/lualine.nvim',
-      requires = {
-        'kyazdani42/nvim-web-devicons', opt = true,
-      }
-    }
-    use {
-      'akinsho/bufferline.nvim',
-      tag = "v2.*",
-      requires = 'kyazdani42/nvim-web-devicons',
-    }
-    use 'simrat39/symbols-outline.nvim' -- A tree like view for symbols
+    {
+        'nvim-lualine/lualine.nvim',
+        dependeces = {
+            'kyazdani42/nvim-web-devicons', opt = true,
+        },
+
+        cond = not_vscode
+    },
+    {
+        'akinsho/bufferline.nvim',
+        verison = "*",
+        dependeces = 'kyazdani42/nvim-web-devicons',
+        cond = not_vscode
+    },
+    {
+        'simrat39/symbols-outline.nvim', -- A tree like view for symbols,
+        cond = not_vscode
+    },
 
 
     -- comments
-    -- use 'b3nj5m1n/kommentary'
-    -- use "terrortylor/nvim-comment"
-    use 'numToStr/Comment.nvim'
+    --  'b3nj5m1n/kommentary'
+    --  "terrortylor/nvim-comment"
+    {
+        'numToStr/Comment.nvim',
+        cond = not_vscode
+    },
 
     -- background
-    use { "ellisonleao/gruvbox.nvim" }
+    {
+        "ellisonleao/gruvbox.nvim",
+        priority = 1000,
+        config = true,
+        opts = ...,
+        cond = not_vscode
+    },
 
     -- auto pairs
-    use 'windwp/nvim-autopairs'
+    {
+        'windwp/nvim-autopairs',
+        cond = not_vscode
+    },
 
     -- debug
-    use 'mfussenegger/nvim-dap'
-    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
-    use 'theHamsta/nvim-dap-virtual-text'
+    {
+        'mfussenegger/nvim-dap',
+        cond = not_vscode
+    },
+    {
+        "rcarriga/nvim-dap-ui",
+        dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+        cond = not_vscode
+    },
+    {
+        'theHamsta/nvim-dap-virtual-text',
+        cond = not_vscode
+    },
 
 
 
     -- find and jump
-    use {
-      'nvim-telescope/telescope.nvim',
-      requires = 'nvim-lua/plenary.nvim'
-    } -- fuzzy finder
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-    use { 'nvim-telescope/telescope-ui-select.nvim' }
-    use 'windwp/nvim-spectre'           -- replace
-    use { 'kevinhwang91/nvim-hlslens' } -- better glance at matched information
+    {
+        'nvim-telescope/telescope.nvim',
+        dependeces = 'nvim-lua/plenary.nvim',
+        cond = not_vscode
+    }, -- fuzzy finder
+    {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make',
+        cond = not_vscode
+    },
+    {
+        'nvim-telescope/telescope-ui-select.nvim',
+        cond = not_vscode
+    },
+    {
+        'windwp/nvim-spectre', -- replace,
+        cond = not_vscode
+    },
+    {
+        'kevinhwang91/nvim-hlslens',
+        -- cond = not_vscode
+    }, -- better glance at matched information
 
 
     -- git
-    -- use {
+    --  {
     -- 'sindrets/diffview.nvim',
-    -- requires = 'nvim-lua/plenary.nvim'
-    -- }
-    use {
-      'lewis6991/gitsigns.nvim',
-    }
+    -- dependeces = 'nvim-lua/plenary.nvim'
+    -- },
+    {
+        'lewis6991/gitsigns.nvim',
+        cond = not_vscode
+    },
     -- which-key
-    use 'folke/which-key.nvim'
-  end
-end)
+    {
+        'folke/which-key.nvim',
+        cond = not_vscode
+    },
+    {
+        'nvim-lua/plenary.nvim',
+        lazy = true
+    },
+}

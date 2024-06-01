@@ -1,5 +1,5 @@
 -- luasnip setup
-local luasnip = require 'luasnip'
+local luasnip = require ('luasnip')
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -59,13 +59,13 @@ cmp.setup({
     { name = 'nvim_lua' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lsp_document_symbol' },
-    { name = 'cmp_tabnine' },
+    -- { name = 'cmp_tabnine' },
     { name = 'calc' }
   }),
 
   sorting = {
     comparators = {
-      require('cmp_tabnine.compare'),
+      -- require('cmp_tabnine.compare'),
       cmp.config.compare.offset,
       cmp.config.compare.exact,
       cmp.config.compare.recently_used,

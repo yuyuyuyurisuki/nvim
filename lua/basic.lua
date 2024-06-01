@@ -8,24 +8,17 @@ vim.opt.termguicolors = true
 -- utf8
 vim.g.encoding = "UTF-8"
 vim.o.fileencoding = 'utf-8'
--- 使用相对行号
 
-if vim.g.vscode then
-else
-    vim.wo.number = true
-    vim.wo.relativenumber = true
-end
+-- 禁止创建备份文件
+vim.o.backup = false
+vim.o.writebackup = false
+vim.o.swapfile = false
+-- 使用增强状态栏后不再需要 vim 的模式提示
+vim.o.showmode = false
 -- 高亮所在行
 vim.wo.cursorline = true
--- 显示左侧图标指示列
-vim.wo.signcolumn = "yes"
 -- 右侧参考线，超过表示代码太长了，考虑换行
 -- vim.wo.colorcolumn = "80"
--- 缩进4个空格等于一个Tab
-vim.o.tabstop = 4
-vim.bo.tabstop = 4
-vim.o.softtabstop = 4
-vim.bo.softtabstop = 4
 -- vim.o.expandtab = true
 vim.o.shiftround = true
 -- >> << 时移动长度
@@ -34,12 +27,8 @@ vim.bo.shiftwidth = 4
 -- 搜索大小写不敏感，除非包含大写
 vim.o.ignorecase = true
 vim.o.smartcase = true
--- 搜索要高亮
-vim.o.hlsearch = true
 -- 边输入边搜索
 vim.o.incsearch = true
--- 使用增强状态栏后不再需要 vim 的模式提示
-vim.o.showmode = false
 -- 命令行高为4，提供足够的显示空间
 vim.o.cmdheight = 4
 -- 当文件被外部程序修改时，自动加载
@@ -54,10 +43,6 @@ vim.o.whichwrap = 'b,s,<,>,[,],h,l'
 vim.o.hidden = true
 -- 鼠标支持
 vim.o.mouse = "a"
--- 禁止创建备份文件
-vim.o.backup = false
-vim.o.writebackup = false
-vim.o.swapfile = false
 -- smaller updatetime
 vim.o.updatetime = 300
 -- 等待mappings
@@ -66,33 +51,22 @@ vim.o.timeoutlen = 100
 vim.o.splitbelow = true
 vim.o.splitright = true
 
--- 自动补全不自动选中
-vim.g.completeopt = "menu,menuone,noselect,noinsert"
 -- 不可见字符的显示，这里只把空格显示为一个点
 vim.o.list = true
 vim.o.listchars = "space:·"
--- 补全增强
-vim.o.wildmenu = true
 -- Dont' pass messages to |ins-completin menu|
 vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.pumheight = 10
 -- always show tabline
 vim.o.showtabline = 4
 vim.opt.shell = "/bin/fish"
+-- 搜索要高亮
+vim.o.hlsearch = true
 
 -- vim.g.mapleader = ';'
 -- vim.g.maplocalleader = ';'
 -- let neovim use system clipboard
 vim.opt.clipboard = "unnamedplus"
-
--- change background
-
-
---clipboard_sync_system
-
---nvim-tree open
-
--- clipborad_sync_system
 
 vim.cmd([[
     augroup highlight_yank
@@ -101,3 +75,20 @@ vim.cmd([[
 augroup END
 
 ]])
+
+if not vim.g.vscode then
+    -- 使用相对行号
+    vim.wo.number = true
+    vim.wo.relativenumber = true
+    -- 缩进4个空格等于一个Tab
+    vim.o.tabstop = 4
+    vim.bo.tabstop = 4
+    vim.o.softtabstop = 4
+    vim.bo.softtabstop = 4
+    -- 补全增强
+    vim.o.wildmenu = true
+    -- 自动补全不自动选中
+    vim.g.completeopt = "menu,menuone,noselect,noinsert"
+    -- 显示左侧图标指示列
+    vim.wo.signcolumn = "yes"
+end

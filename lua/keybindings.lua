@@ -32,10 +32,6 @@ else
   map("n", "<leader>bp", ":BufferLinePickClose<CR>", sopt)
   map("n", "<leader>bo", ":BufferLineCloseLeft<CR>:BufferLineCloseRight<CR>", sopt)
 
-
-
-
-
   -- terminal
   map("t", "<C-w>", "<C-\\><C-n>:q<CR>", sopt)
 
@@ -76,8 +72,8 @@ else
   map('s', "<C-E>", "luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'", sopte)
 
   -- float terminal =
-  map("n", "<C-A-t>", "<cmd>Lspsaga open_floaterm<CR>", sopt)
-  map("t", "<C-A-t>", "<C-\\><C-n><cmd>Lspsaga close_floaterm<CR>", sopt)
+  map("n", "<C-A-t>", "<cmd>Lspsaga term_toggle<CR>", sopt)
+  map("t", "<C-A-t>", "<C-\\><C-n><cmd>Lspsaga term_toggle<CR>", sopt)
 
   -- outline
   map("n", "<leader>ol", "<cmd>LSoutlineToggle<CR>", sopt)

@@ -1,9 +1,5 @@
 local M = {}
 
-
-
-
-
 M.starts_with = function(str, start)
   return str:sub(1, #start) == start
 end
@@ -34,32 +30,30 @@ end
 
 
 -- gtags
-M.GtagsRefernce = function()
+M.GtagsRefernce                                                               = function()
   local word = vim.api.nvim_call_function("expand", { "<cword>" })
   vim.api.nvim_command(":cs find c " .. word)
   vim.api.nvim_command(":copen")
 end
 
-M.GtagsText = function()
+M.GtagsText                                                                   = function()
   local word = vim.api.nvim_call_function("expand", { "<cword>" })
   vim.api.nvim_command(":cs find t " .. word)
   vim.api.nvim_command(":copen")
 end
 
+M.capabilities                                                                = require('cmp_nvim_lsp')
+.default_capabilities(capabilities)
 
-local cmp_nvim_lsp = require('cmp_nvim_lsp')
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
-
-M.capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
-M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-M.capabilities.textDocument.completion.completionItem.preselectSupport = true
-M.capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-M.capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-M.capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+M.capabilities.textDocument.completion.completionItem.documentationFormat     = { 'markdown', 'plaintext' }
+M.capabilities.textDocument.completion.completionItem.snippetSupport          = true
+M.capabilities.textDocument.completion.completionItem.preselectSupport        = true
+M.capabilities.textDocument.completion.completionItem.insertReplaceSupport    = true
+M.capabilities.textDocument.completion.completionItem.labelDetailsSupport     = true
+M.capabilities.textDocument.completion.completionItem.deprecatedSupport       = true
 M.capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
-M.capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
-M.capabilities.textDocument.completion.completionItem.resolveSupport = {
+M.capabilities.textDocument.completion.completionItem.tagSupport              = { valueSet = { 1 } }
+M.capabilities.textDocument.completion.completionItem.resolveSupport          = {
   properties = {
     'documentation',
     'detail',
@@ -67,14 +61,13 @@ M.capabilities.textDocument.completion.completionItem.resolveSupport = {
   },
 }
 
-M.root_dir = function()
+M.root_dir                                                                    = function()
   return vim.fn.getcwd()
 end
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-M.on_attach = function(client, bufnr)
-
+M.on_attach                                                                   = function(client, bufnr)
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   -- Highlighting references
