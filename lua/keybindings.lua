@@ -7,11 +7,19 @@ local pluginKeys = {}
 if vim.g.vscode then
   -- map("n", "gd", "<cmd>call VSCodeNotify('editor.action.revealDefinitionAside')<CR>", sopt)
   -- map("n", "K", "<cmd>call VSCodeNotify('editor.action.peekDefinition')<CR>", sopt)
-  map("n", "gn", "<cmd>call VSCodeNotify('editor.action.marker.next')<CR>", sopt)
-  map("n", "gp", "<cmd>call VSCodeNotify('editor.action.marker.prev')<CR>", sopt)
+  -- map("n", "gn", "<cmd>require('vscode').call('editor.action.marker.next')<CR>", sopt)
+  -- map("n", "gp", "<cmd>require('vscode).call('editor.action.marker.prev')<CR>", sopt)
 
-  map("n", "gs", "<cmd>call VSCodeNotify('editor.action.quickFix')<CR>", sopt)
+  -- map("n", "gs", "<cmd>require('vscode').call('editor.action.quickFix')<CR>", sopt)
+  -- map("n", "gD", "<cmd>require('vscode').call('editor.action.goToImplementation')<CR>", sopt)
+  -- map("n", "gb", "<cmd>require('vscode).action('workbench.action.navigateBack')<CR>", sopt)
+  -- map("n", "gf", "<cmd>require('vscode).call('workbench.action.navigateForward')<CR>", sopt)
   -- map("n", "gs", "<cmd>call VSCodeNotify('problems.action.showQuickFixes')<CR>", sopt)
+  --
+  map("n", "gb", "<cmd>lua require('vscode').call('workbench.action.navigateBack')<CR>", sopt)
+  map("n", "gf", "<cmd>lua require('vscode').call('workbench.action.navigateForward')<CR>", sopt)
+  map("n", "gD", "<cmd>lua require('vscode').call('editor.action.goToImplementation')<CR>", sopt)
+  map("n", "gs", "<cmd>lua require('vscode').call('editor.action.quickFix')<CR>", sopt)
 else
   -- format
   map('n', '<S-A-f>', '<Cmd>lua vim.lsp.buf.format { async = true }<CR>', opt)
@@ -100,7 +108,7 @@ else
   -- go xx
   -- map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opt)
   -- or use command
-  map("n", "gd", "<cmd>Lspsaga preview_definition<CR>", sopt)
+  map("n", "gd", "<cmd>Lspsaga peek_definition<CR>", sopt)
   -- hover doc
   map("n", "K", "<cmd>Lspsaga hover_doc<CR>", sopt)
 

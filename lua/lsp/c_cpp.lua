@@ -27,7 +27,7 @@ require("clangd_extensions").setup {
         "--clang-tidy-checks=performance-*,bugprone-",
         "--header-insertion=iwyu"
       },
-      filetypes = { "c", "cpp"},
+      filetypes = { "c", "cpp" },
     }
   },
   extensions = {
@@ -36,6 +36,7 @@ require("clangd_extensions").setup {
     autoSetHints = true,
     -- These apply to the default ClangdSetInlayHints command
     inlay_hints = {
+      inline = vim.fn.has("nvim-0.10") == 1,
       -- Only show inlay hints for the current line
       only_current_line = false,
       -- Event which triggers a refersh of the inlay hints.
@@ -95,3 +96,8 @@ require("clangd_extensions").setup {
     },
   }
 }
+
+require("clangd_extensions.inlay_hints").setup_autocmd()
+require("clangd_extensions.inlay_hints").set_inlay_hints()
+
+-- require("clangd_extensions.inlay_hints").toggle_inlay_hints()

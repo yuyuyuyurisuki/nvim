@@ -16,8 +16,7 @@ return {
         cond = not_vscode
     },
     {
-        "glepnir/lspsaga.nvim",
-        branch = "main",
+        "nvimdev/lspsaga.nvim",
         cond = not_vscode
     },
     -- Autocompletion plugin
@@ -293,4 +292,8 @@ return {
         'nvim-lua/plenary.nvim',
         lazy = true
     },
+    {
+       'lewis6991/hover.nvim',
+       lazy = true
+    }
 }
