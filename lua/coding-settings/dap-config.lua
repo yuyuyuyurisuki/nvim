@@ -27,13 +27,13 @@ local function config_dapi_and_sign()
 end
 
 local function config_dapui()
-  local dap, dapui = require "dap", require "plugins-config.dapui"
+  local dap, dapui                                      = require "dap", require "plugins-config.dapui"
 
-  local debug_open = function()
+  local debug_open                                      = function()
     dapui.open()
     vim.api.nvim_command("DapVirtualTextEnable")
   end
-  local debug_close = function()
+  local debug_close                                     = function()
     dap.repl.close()
     dapui.close()
     vim.api.nvim_command("DapVirtualTextDisable")
@@ -82,4 +82,5 @@ function M.setup()
   config_dapui()
   config_debuggers()
 end
+
 return M
